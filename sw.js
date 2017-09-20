@@ -3,6 +3,7 @@ const staticCacheName = `${version}static-resources`;
 
 
 self.addEventListener('install', function(event) {
+  console.log('installing....', event);
   event.waitUntil(
     caches.open('v1').then(function(cache) {
       console.log('cache...', cache);
@@ -22,6 +23,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
+  console.log('fetching....', event);
   event.respondWith(caches.match(event.request).then(function(response) {
     // caches.match() always resolves
     // but in case of success response will have value
