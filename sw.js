@@ -1,6 +1,11 @@
+const version = "v1::" //Change if you want to regenerate cache
+const staticCacheName = `${version}static-resources`;
+
+
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open('v1').then(function(cache) {
+      console.log('cache...', cache);
       return cache.addAll([
         '/sw-test/',
         '/sw-test/index.html',
@@ -20,6 +25,7 @@ self.addEventListener('fetch', function(event) {
   event.respondWith(caches.match(event.request).then(function(response) {
     // caches.match() always resolves
     // but in case of success response will have value
+    console.log('fetch...', caches);
     if (response !== undefined) {
       return response;
     } else {
